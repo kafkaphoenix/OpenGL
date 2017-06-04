@@ -22,6 +22,16 @@ int main(int argc, char *argv[])
 
 	SDL_GLContext context = SDL_GL_CreateContext(window);
 
+	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
+
+	SDL_Surface *image = SDL_LoadBMP("image.bmp");
+
+	if (image == NULL) {
+		std::cout << "SDL could not  load image" << std::endl << SDL_GetError() << std::endl;
+	}
+
+	SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, image);
+
 	glewExperimental = GL_TRUE;
 
 	if (GLEW_OK != glewInit())
@@ -46,10 +56,16 @@ int main(int argc, char *argv[])
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		SDL_RenderCopy(renderer, texture, NULL, NULL);
+		SDL_RenderPresent(renderer);
+
 		//Draw OpenGL
-		SDL_GL_SwapWindow(window);
+		//SDL_GL_SwapWindow(window);
 	}
 
+	SDL_DestroyTexture(texture);
+	SDL_FreeSurface(image);
+	SDL_DestroyRenderer(renderer);
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
