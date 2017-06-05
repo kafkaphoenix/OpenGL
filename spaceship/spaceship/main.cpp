@@ -38,9 +38,13 @@ int main(int argc, char ** argv)
 		case SDL_KEYDOWN:
 			switch (event.key.keysym.sym)
 			{
+			case SDLK_a:
 			case SDLK_LEFT:  x--; break;
+			case SDLK_d:
 			case SDLK_RIGHT: x++; break;
+			case SDLK_w:
 			case SDLK_UP:    y--; break;
+			case SDLK_s:
 			case SDLK_DOWN:  y++; break;
 			case SDLK_ESCAPE: quit = true; break;
 			}

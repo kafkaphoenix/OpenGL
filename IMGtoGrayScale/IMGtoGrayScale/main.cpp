@@ -92,6 +92,9 @@ int main(int argc, char ** argv)
 		SDL_RenderPresent(renderer);
 	}
 
+	SDL_SaveBMP(image, "out.bmp");
+	IMG_SavePNG(image, "out.png");
+
 	SDL_DestroyTexture(texture);
 	SDL_FreeSurface(image);
 	SDL_DestroyRenderer(renderer);
